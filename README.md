@@ -1,7 +1,5 @@
 # To Do
 
-- add uniqe name and wallet checking
-
 # Testing
 
 ### Signup
