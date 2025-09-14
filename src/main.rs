@@ -5,7 +5,7 @@ mod handlers;
 use axum::{routing::{get, post}, Router};
 use std::net::SocketAddr;
 use db::init_db;
-use handlers::{signup, login, list_users};
+use handlers::{signup, login, list_users, me};
 
 #[tokio::main]
 async fn main() {
@@ -15,6 +15,7 @@ async fn main() {
         .route("/signup", post(signup))
         .route("/login", post(login))
         .route("/users", get(list_users))
+        .route("/me", get(me))
         .with_state(pool);
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));

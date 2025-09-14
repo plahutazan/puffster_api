@@ -16,12 +16,28 @@ pub async fn init_db() -> SqlitePool {
         .await
         .unwrap();
 
+
     // create table if it doesn't exist
     sqlx::query(
         r#"
         CREATE TABLE IF NOT EXISTS users (
             display_name TEXT NOT NULL,
             wallet TEXT PRIMARY KEY
+        )
+        "#
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+
+
+    // Create sessions table
+    sqlx::query(
+        r#"
+        CREATE TABLE IF NOT EXISTS sessions (
+            token TEXT PRIMARY KEY,
+            wallet TEXT NOT NULL,
+            expires_at INTEGER NOT NULL
         )
         "#
     )
